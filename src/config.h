@@ -58,4 +58,5 @@ constexpr uint32_t SIM_MAX_MS = 10000;
 constexpr uint8_t LED_PIN = 2;
 constexpr uint16_t LED_COUNT = 30;  // set to the real strip length
 constexpr uint8_t LED_BRIGHTNESS = 100;
-constexpr uint32_t LED_FRAME_MS = 20;  // rainbow refresh interval
+constexpr uint32_t LED_FRAME_MS = 20;  // idle/rainbow refresh interval (50 fps)
+constexpr uint32_t IDLE_FADE_MS = 1000;  // idle animation fade-in after release

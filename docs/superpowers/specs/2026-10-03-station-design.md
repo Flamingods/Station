@@ -95,7 +95,10 @@ The effective mask sent = physical mask OR simulated mask (while a web hold is a
 - WS2812B strip, data on **GPIO 2** (pins ran out; green button moved from 2 to 32). `LED_COUNT` in `config.h` (default 30 until the real count is known),
   `LED_BRIGHTNESS` 100/255, GRB order.
 - Mirrors the effective mask (physical | web-simulated) locally, independent of the network:
-  - idle (mask 0): dim warm glow `(8, 4, 0)`
+  - idle (mask 0): per-station animation at ≤40% (`IDLE_MAX_LEVEL` 102), 50 fps, fading
+    in over 1 s after release: 1 Embers (red/orange flicker), 2 Tide (blue/cyan waves),
+    3 Aurora (green/teal/purple + shimmer), 4 Pulse (magenta/cyan comet, 8-LED tail).
+    Logic in `lib/station_core/IdleAnimation.*` (host-tested).
   - other masks: whole strip = the Flamingo's `getBlendedColorFromPackets()` blend:
     average of pressed red 255,0,0 / green 0,255,0 / blue 0,0,255 / yellow 180,180,0;
     white alone = 191,191,191; white with colors lightens the average to

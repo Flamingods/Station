@@ -34,8 +34,16 @@ LED strip (WS2812B): data → **GPIO 2**, plus 5 V and GND (share GND with the E
 GPIO 34–39 are input-only on the ESP32 and cannot drive a strip. Set the strip
 length in `LED_COUNT` (`src/config.h`, default 30).
 
-The strip mirrors the pressed buttons with the Flamingo's color blend, shows a
-moving rainbow while all five are held, and glows dimly when idle.
+The strip mirrors the pressed buttons with the Flamingo's color blend and shows a
+moving rainbow while all five are held. When idle, each station plays its own dim
+animation (fading in over 1 s after release), echoing its Flamingo special mode:
+
+| Station | Idle animation |
+|---------|----------------|
+| 1 | Embers — red/orange flicker |
+| 2 | Tide — blue/cyan waves |
+| 3 | Aurora — green/teal/purple curtains with shimmer |
+| 4 | Pulse — magenta/cyan comet |
 
 ## Protocol
 
