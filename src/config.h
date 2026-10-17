@@ -35,8 +35,8 @@ constexpr uint32_t FLAMINGO_RESOLVE_RETRY_MS = 5000;
 constexpr uint32_t FLAMINGO_REFRESH_MS = 60000;  // re-resolve a hostname this often
 
 // Network
-#define WIFI_SSID "DiMax Residency 2.4Ghz"
-#define WIFI_PASSWORD "33355555DM"
+#define WIFI_SSID "flamingods-station"
+#define WIFI_PASSWORD "Aa123456!"
 constexpr uint32_t CONNECT_TIMEOUT_MS = 10000;
 constexpr uint32_t NETWORK_RETRY_MS = 10000;
 
@@ -56,8 +56,8 @@ constexpr uint32_t SIM_MAX_MS = 10000;
 
 // LED strip (WS2812B, GRB) mirroring the pressed buttons. Must be an output-capable
 // pin (GPIO 34-39 are input-only).
-constexpr uint8_t LED_PIN = 2;
-constexpr uint16_t LED_COUNT = 30;  // set to the real strip length
+constexpr uint8_t LED_PIN = 33;  // "485_EN" on the WT32-ETH01 silkscreen
+constexpr uint16_t LED_COUNT = 100;
 constexpr uint8_t LED_BRIGHTNESS = 100;
 constexpr uint32_t LED_FRAME_MS = 20;  // idle/rainbow refresh interval (50 fps)
 constexpr uint32_t IDLE_FADE_MS = 1000;  // idle animation fade-in after release

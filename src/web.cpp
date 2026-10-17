@@ -62,6 +62,8 @@ static void handleStatus() {
     doc["mac"] = network_mac();
     if (strcmp(network_type(), "wifi") == 0) doc["rssi"] = network_rssi();
     doc["uptime_s"] = uint32_t(esp_timer_get_time() / 1000000);  // 64-bit: millis() wraps at 49.7 days
+    doc["led_pin"] = LED_PIN;
+    doc["led_count"] = LED_COUNT;
     doc["current_mask"] = stats.currentMask;
     doc["press_count"] = stats.pressCount;
     doc["packets_sent"] = stats.packetsSent;

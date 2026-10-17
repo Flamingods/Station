@@ -95,12 +95,16 @@ The effective mask sent = physical mask OR simulated mask (while a web hold is a
 
 ## LED strip (added 2026-10-03)
 
-- WS2812B strip, data on **GPIO 2** (pins ran out; green button moved from 2 to 32). `LED_COUNT` in `config.h` (default 30 until the real count is known),
+- WS2812B strip, data on **GPIO 33** (`485_EN`; moved off GPIO 2 on 2026-10-17 when the strip got no data there). `LED_COUNT` in `config.h` (100),
   `LED_BRIGHTNESS` 100/255, GRB order.
 - Mirrors the effective mask (physical | web-simulated) locally, independent of the network:
-  - idle (mask 0): per-station animation at ≤40% (`IDLE_MAX_LEVEL` 102), 50 fps, fading
-    in over 1 s after release: 1 Embers (red/orange flicker), 2 Tide (blue/cyan waves),
-    3 Aurora (green/teal/purple + shimmer), 4 Pulse (magenta/cyan comet, 8-LED tail).
+  - idle (mask 0), 50 fps, fading in over 1 s after release, built to lure people to the
+    buttons (revised 2026-10-17): a per-station ambient at ≤45% (`IDLE_AMBIENT_LEVEL` 115)
+    - 1 Fire (flames from both ends, sparks), 2 Ocean (swells, foam), 3 Northern Lights
+    (curtains, stars), 4 Electric (three comets, white crackle). Every 8 s an invitation
+    swells to ≤80% (`IDLE_MAX_LEVEL` 205): 4200-5200 ms swell, 5200-7300 ms five dots in
+    the button colors chase the strip (direction alternates per cycle), 7300-8000 ms burst
+    into five button-colored segments (order rotates per cycle) fading back to ambient.
     Logic in `lib/station_core/IdleAnimation.*` (host-tested).
   - other masks: whole strip = the Flamingo's `getBlendedColorFromPackets()` blend:
     average of pressed red 255,0,0 / green 0,255,0 / blue 0,0,255 / yellow 180,180,0;

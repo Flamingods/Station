@@ -30,20 +30,23 @@ Build output goes to `~/.platformio/workspaces/station` (kept out of iCloud-sync
 
 Each button: GPIO ↔ GND, internal pull-up (pressed = LOW).
 
-LED strip (WS2812B): data → **GPIO 2**, plus 5 V and GND (share GND with the ESP32).
+LED strip (WS2812B): data → **GPIO 33** (labeled `485_EN` on the WT32-ETH01), plus 5 V and GND (share GND with the ESP32).
 GPIO 34–39 are input-only on the ESP32 and cannot drive a strip. Set the strip
-length in `LED_COUNT` (`src/config.h`, default 30).
+length in `LED_COUNT` (`src/config.h`, 100).
 
 The strip mirrors the pressed buttons with the Flamingo's color blend and shows a
-moving rainbow while all five are held. When idle, each station plays its own dim
-animation (fading in over 1 s after release), echoing its Flamingo special mode:
+moving rainbow while all five are held. When idle, each station plays an animation
+built to lure people to the buttons (fading in over 1 s after release). A dim themed
+ambient echoes its Flamingo special mode, and every 8 s it swells, chases five dots in
+the button colors along the strip (alternating direction), and bursts into them before
+settling back:
 
-| Station | Idle animation |
-|---------|----------------|
-| 1 | Embers — red/orange flicker |
-| 2 | Tide — blue/cyan waves |
-| 3 | Aurora — green/teal/purple curtains with shimmer |
-| 4 | Pulse — magenta/cyan comet |
+| Station | Idle ambient |
+|---------|--------------|
+| 1 | Fire — flames from both ends, drifting sparks |
+| 2 | Ocean — rolling swells with foam on the crests |
+| 3 | Northern Lights — green/teal/purple curtains over twinkling stars |
+| 4 | Electric — three magenta/cyan/blue comets crackling white |
 
 ## Protocol
 
