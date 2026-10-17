@@ -59,7 +59,9 @@ lib/station_core/     framework-free logic (testable on host):
                       stream behavior above
 src/network.h/.cpp    ETH first (10 s), WiFi fallback (10 s); runtime: if both down,
                       retry every 10 s without blocking loop; mDNS station-N.local;
-                      resolve Flamingo IP, re-resolve every 5 s while unresolved.
+                      resolve Flamingo IP, re-resolve every 5 s while unresolved and
+                      every 60 s once known (keeps last address on failure); ETH lost
+                      DHCP lease counts as ETH down.
 src/web.h/.cpp        GET / test page; GET /status JSON; POST /press?mask=0xNN&ms=1000
                       (simulated hold, default 1000 ms, max 10000).
 src/ota.h/.cpp        ArduinoOTA, hostname station-N, password from config.
@@ -80,7 +82,8 @@ The effective mask sent = physical mask OR simulated mask (while a web hold is a
 
 - No network or unresolved Flamingo: skip sends silently, keep reading buttons.
 - Boot never blocks more than ~10 s per interface.
-- OTA in progress: stream continues (ArduinoOTA handles in loop).
+- OTA in progress: the upload blocks the loop, so streaming stops; a release (mask 0)
+  is sent at OTA start and the LEDs show a blue progress bar.
 
 ## Testing
 

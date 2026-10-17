@@ -32,6 +32,7 @@ constexpr uint16_t FLAMINGO_PORT = 5000;
 constexpr uint32_t STREAM_INTERVAL_MS = 20;
 constexpr uint8_t RELEASE_REPEATS = 3;
 constexpr uint32_t FLAMINGO_RESOLVE_RETRY_MS = 5000;
+constexpr uint32_t FLAMINGO_REFRESH_MS = 60000;  // re-resolve a hostname this often
 
 // Network
 #define WIFI_SSID "DiMax Residency 2.4Ghz"

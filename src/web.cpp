@@ -1,6 +1,7 @@
 #include "web.h"
 #include <ArduinoJson.h>
 #include <WebServer.h>
+#include <esp_timer.h>
 #include "Parse.h"
 #include "SimHold.h"
 #include "config.h"
@@ -60,7 +61,7 @@ static void handleStatus() {
     doc["ip"] = network_ip();
     doc["mac"] = network_mac();
     if (strcmp(network_type(), "wifi") == 0) doc["rssi"] = network_rssi();
-    doc["uptime_s"] = millis() / 1000;
+    doc["uptime_s"] = uint32_t(esp_timer_get_time() / 1000000);  // 64-bit: millis() wraps at 49.7 days
     doc["current_mask"] = stats.currentMask;
     doc["press_count"] = stats.pressCount;
     doc["packets_sent"] = stats.packetsSent;

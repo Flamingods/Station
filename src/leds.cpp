@@ -50,3 +50,14 @@ void leds_update(uint8_t mask, uint32_t nowMs) {
     const bool animated = mask == 0 || mask == ALL_BUTTONS_MASK;
     if (mask != shownMask || (animated && nowMs - lastFrameMs >= LED_FRAME_MS)) draw(mask, nowMs);
 }
+
+void leds_progress(uint32_t done, uint32_t total) {
+    const uint16_t lit = total ? uint64_t(done) * LED_COUNT / total : 0;
+    static uint16_t shownLit = UINT16_MAX;
+    if (lit == shownLit) return;  // progress fires every ~1.4 KB; only redraw on change
+    shownLit = lit;
+    fill_solid(leds, LED_COUNT, CRGB::Black);
+    fill_solid(leds, lit, CRGB(0, 0, 80));
+    FastLED.show();
+    shownMask = 0xFF;  // force a redraw if the upload fails and the loop resumes
+}
